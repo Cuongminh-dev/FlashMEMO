@@ -13,7 +13,34 @@
 </head>
 
 <body>
+    <div id="gameOverlay" class="hidden">
+        <div id="gameOverBox">
+            <h2 id="gameOverTitle">GAME OVER</h2>
 
+            <div class="go-stats">
+                <div class="go-stat">
+                    <span id="goScore">0</span>
+                    <label>ĐIỂM</label>
+                </div>
+                <div class="go-stat">
+                    <span id="goBest">0</span>
+                    <label>ĐIỂM CAO NHẤT</label>
+                </div>
+            </div>
+
+            <div class="go-medal">
+                <label>Huy hiệu</label>
+                <span id="goMedal">-</span>
+            </div>
+
+            <div it="goButtons">
+                <button class="go-btn primary" onclick="playAgain()">Chơi lại</button>
+                <button class="go-btn secondary" onclick="goToMenuFromGameOver()">Về menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Badge -->
     <div id="playerBadge">
         <span id="playerName">User0000</span>
         <button id="editNameBtn" onclick="openNameModal()">✏️</button>
@@ -27,6 +54,8 @@
             <button id="nameModalSave" onclick="saveNameFromModal()">Lưu</button>
         </div>
     </div>
+
+    <!-- Menu Screen -->
     <div id="menuScreen">
         <div class="logo">Flash<span class="after">MEMO</span></div>
         <p class="tagline">Quan sát. Ghi nhớ. Tái hiện trước khi bóng tối nuốt chửng</p>
@@ -94,6 +123,8 @@
         </div>
     </div>
 
+
+    <!-- Game Screen -->
     <div id="gameScreen" class="hidden">
         <div id="gameInfo">
             <span id="livesDisplay">❤️❤️❤️</span>

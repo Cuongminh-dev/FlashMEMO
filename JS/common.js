@@ -168,6 +168,7 @@ function loseLife() {
         clearObserveCountdown();
         clearTimeout(gameTimer);
         clearTimeout(pathAnimTimer);
+        gameTimer = setTimeout(showGameOver, 900);
     }
 }
 function startAnswerTimer() {
@@ -219,12 +220,6 @@ function onStageCleared() {
         gameTimer = setTimeout(playMazeStage, 1200);
     }
 }
-
-function restartCurrentStage() {
-    if (chosenMode === 'numbers') playSequenceStage();
-    else if (chosenMode === 'path') playPathStage();
-    else playMazeStage();
-}
 function registerCorrectPick() {
     comboCount++;
     multiplier = Math.min(5, 1 + Math.floor(comboCount / 5));
@@ -236,4 +231,54 @@ function resetCombo() {
     comboCount = 0;
     multiplier = 1;
     updateScoreDisplay();
+}
+function getBestKey() {
+    return 'Best_' + chosenMode + '_' + chosenDiff;
+}
+function getBestScore() {
+    return Number(localStorage.getItem(getBestKey()) || 0);
+}
+function getMedal(points) {
+    if (points >= 500) return '🥇';
+    if (points >= 300) return '🥈';
+    if (points >= 100) return '🥉';
+    return '-';
+}
+function showGameOver() {
+    const best = Math.max(score, getBestScore());
+    localStorage.setItem(getBestKey(), best);
+    document.getElementById('goScore').textContent = score;
+    document.getElementById('goBest').textContent = best;
+    document.getElementById('goMedal').textContent = getMedal(score);
+    document.getElementById('gameOverlay').classList.remove('hidden');
+}
+function playAgain() {
+    document.getElementById('gameOverlay').classList.add('hidden');
+    startGame();
+}
+
+function goToMenuFromGameOver() {
+    document.getElementById('gameOverlay').classList.add('hidden');
+    backToMenu();
+}
+function restartCurrentStage() {
+    if (chosenMode === 'numbers') playSequenceStage();
+    else if (chosenMode === 'path') playPathStage();
+    else playMazeStage();
+}
+function initPlayerName() {
+    let saved = localStorage.getItem('playerName');
+    if (!saved) {
+        saved = 'User' + Math.floor(1000 + Math.random() * 9000);
+        localStorage.setItem('playerName', saved);
+    }
+    document.getElementById('playerName').textContent = saved;
+}
+initPlayerName();
+function clearObserveCountdown() {
+    if (observeCountdownTimer) {
+        clearInterval(observeCountdownTimer);
+        observeCountdownTimer = null;
+    }
+    document.getElementById('timerDisplay').classList.add('hidden');
 }
