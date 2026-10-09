@@ -9,7 +9,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="STYLE/style.css">
+
+    <link rel="stylesheet" href="STYLE/base.css">
+    <link rel="stylesheet" href="STYLE/menu.css">
+    <link rel="stylesheet" href="STYLE/game.css">
+    <link rel="stylesheet" href="STYLE/maze.css">
+    <link rel="stylesheet" href="STYLE/overlay.css">
 </head>
 
 <body>
@@ -119,7 +124,8 @@
                 <div class="diff-pill" onclick="selectDiff('hard', this)">Khó</div>
             </div>
 
-            <button class="start-btn" id="startBtn" onclick="startGame()">Chọn dạng chơi và độ khó để bắt đầu</button>
+            <button class="start-btn" id="startBtn" onclick="startGame()">Chọn dạng chơi và độ khó để bắt
+                đầu</button>
         </div>
     </div>
 
@@ -146,7 +152,8 @@
             <div></div><button class="dir-btn" onclick="moveMaze('down')">↓</button>
             <div></div>
         </div>
-        <p id="dirHint" class="hidden" style="font-size:0.78rem;color:var(--text-muted);margin-top:-8px;">Dùng phím mũi
+        <p id="dirHint" class="hidden" style="font-size:0.78rem;color:var(--text-muted);margin-top:-8px;">Dùng phím
+            mũi
             tên hoặc bấm nút để di chuyển</p>
 
         <button class="back-link" onclick="backToMenu()">← Về màn hình chính</button>

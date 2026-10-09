@@ -1,0 +1,115 @@
+#gameScreen {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+#gameInfo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+#livesDisplay {
+    letter-spacing: 2px;
+}
+
+#stageDisplay {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+#timerDisplay {
+    color: var(--accent-red);
+    font-weight: 700;
+}
+
+#statusText {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-align: center;
+    min-height: 24px;
+}
+
+#statusText.active {
+    color: var(--accent-amber);
+    font-weight: 600;
+}
+
+#statusText.error {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+#statusText.success {
+    color: var(--accent-teal);
+    font-weight: 600;
+}
+
+#gameGrid {
+    display: grid;
+    gap: 7px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.grid-cell {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--accent-amber);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease, transform 0.08s ease, border-color 0.15s ease;
+}
+
+.grid-cell:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-amber);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.grid-cell:active {
+    transform: scale(0.95);
+}
+
+.grid-cell.picked {
+    background: color-mix(in srgb, var(--accent-teal) 22%, var(--card-bg));
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+    animation: popCorrect 0.3s ease;
+}
+
+.grid-cell.wrong {
+    background: color-mix(in srgb, var(--accent-red) 25%, var(--card-bg));
+    border-color: var(--accent-red);
+    animation: shakeWrong 0.4s ease;
+}
+
+.path-lit {
+    background: color-mix(in srgb, var(--accent-teal) 22%, var(--card-bg));
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+}
+
+.back-link {
+    margin-top: 4px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+}

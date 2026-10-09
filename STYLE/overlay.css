@@ -1,0 +1,235 @@
+#nameModalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#nameModalBox {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    background: var(--card-bg);
+    border: 3px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+}
+
+#nameModalBox h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+#nameModalBox p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+#nameModalInput {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    text-align: center;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-main);
+    outline: none;
+    margin-bottom: 16px;
+}
+
+#nameModalInput:focus {
+    border-color: var(--accent-amber);
+}
+
+#nameModalSave {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-amber);
+    color: var(--bg);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#nameModalClose {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+#playerBadge {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    padding: 10px 12px 10px 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#editNameBtn {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+#editNameBtn:hover {
+    background: var(--accent-amber);
+    color: var(--card-bg);
+}
+
+#scoreRow {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+#comboDisplay {
+    background: var(--accent-amber);
+    color: var(--bg);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    animation: popCorrect 0.3s ease;
+}
+
+#gameOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#gameOverBox {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card-bg);
+    border: 3px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+}
+
+#gameOverTitle {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+}
+
+.go-stats {
+    display: flex;
+    justify-content: space-between;
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 16px 8px;
+    margin-bottom: 16px;
+}
+
+.go-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.go-stat span {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.go-stat label,
+.go-medal label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+.go-medal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 22px;
+}
+
+#goMedal {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+#goButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.go-btn {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.go-btn.primary {
+    background: var(--accent-teal);
+    color: var(--card-bg);
+}
+
+.go-btn.secondary {
+    background: var(--bg);
+    color: var(--text-main);
+    border-color: var(--border);
+}

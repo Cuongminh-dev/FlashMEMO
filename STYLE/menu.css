@@ -1,0 +1,134 @@
+.logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.logo .after {
+    color: var(--accent-amber);
+}
+
+.tagline {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 36px;
+    max-width: 420px;
+    line-height: 1.5;
+}
+
+.screen {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.section-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 8px 0 -2px;
+}
+
+.mode-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mode-card:hover {
+    background: var(--card-bg-hover);
+}
+
+.mode-card.selected {
+    border-color: var(--mode-color, var(--accent-amber));
+    background: var(--card-bg-hover);
+}
+
+.mode-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--mode-color, var(--accent-amber)) 18%, transparent);
+}
+
+.mode-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.mode-info h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.mode-info p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.difficulty-row {
+    display: none;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.difficulty-row.visible {
+    display: flex;
+}
+
+.diff-pill {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 6px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.diff-pill.selected {
+    color: var(--bg);
+    background: var(--accent-amber);
+    border-color: var(--accent-amber);
+}
+
+.start-btn {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    background: var(--text-muted);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: not-allowed;
+    transition: background 0.2s ease, opacity 0.2s ease;
+    opacity: 0.5;
+}
+
+.start-btn.ready {
+    background: var(--accent-amber);
+    cursor: pointer;
+    opacity: 1;
+}

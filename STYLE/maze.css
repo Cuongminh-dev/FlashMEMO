@@ -1,0 +1,55 @@
+#mazeStage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-violet);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#mazeSvg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+#mazeFog {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#mazeToken {
+    position: absolute;
+    z-index: 3;
+    border-radius: 50%;
+    background: var(--accent-violet);
+    box-shadow: 0 0 10px 4px color-mix(in srgb, var(--accent-violet) 70%, transparent);
+    transform: translate(-50%, -50%);
+    transition: left 0.15s ease, top 0.15s ease;
+}
+
+#dirPad {
+    display: grid;
+    grid-template-columns: repeat(3, 54px);
+    grid-template-rows: repeat(3, 54px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dir-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dir-btn:active {
+    transform: scale(0.95);
+}

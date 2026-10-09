@@ -1,0 +1,72 @@
+:root {
+    --bg: #12141C;
+    --card-bg: #1B1E29;
+    --card-bg-hover: #232635;
+    --accent-amber: #F2B84B;
+    --accent-teal: #4FD1C5;
+    --accent-violet: #9B8CFF;
+    --accent-red: #F2664B;
+    --text-main: #EDEAE3;
+    --text-muted: #8C90A3;
+    --border: #2A2D3A;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Manrope', sans-serif;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px calc(env(safe-area-inset-bottom, 0px) + 40px);
+    padding-top: max(40px, env(safe-area-inset-top));
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes popCorrect {
+    0% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.18);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shakeWrong {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-6px);
+    }
+
+    40% {
+        transform: translateX(6px);
+    }
+
+    60% {
+        transform: translateX(-4px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
