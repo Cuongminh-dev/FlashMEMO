@@ -7,10 +7,12 @@ function getNeighbors(pos, size) {
     if (col < size - 1) result.push(pos + 1);
     return result;
 }
-function generatePathToLastRow(size) {
+function generatePathToLastRow(size, minLen, maxLen) {
+    maxLen = Math.max(maxLen, size);
+    minLen = Math.min(minLen, maxLen);
     while (true) {
         const startCol = Math.floor(Math.random() * size);
-        stack = [startCol];
+        let stack = [startCol];
         let visited = new Set([startCol]);
         let reached = false;
 
@@ -32,7 +34,7 @@ function generatePathToLastRow(size) {
             stack.push(next);
             visited.add(next);
         }
-        if (reached) return stack;
+        if (reached && stack.length >= minLen && stack.length <= maxLen) return stack;
     }
 }
 function buildEmptyGrid(size) {
@@ -64,7 +66,8 @@ function animatePathReveal(path, stepDuration, onDone) {
             else if (i === path.length - 1) cell.textContent = 'K';
             i++;
             pathAnimTimer = setTimeout(step, stepDuration);
-        } else {
+        }
+        else {
             pathAnimTimer = setTimeout(() => {
                 const lastCell = grid.children[path[path.length - 1]];
                 if (lastCell) { lastCell.classList.remove('path-lit'); lastCell.textContent = ''; }
@@ -73,4 +76,27 @@ function animatePathReveal(path, stepDuration, onDone) {
         }
     }
     step();
+}
+function playPathStage() {
+    updateHeader();
+    playerProgress = 0;
+    inputEnabled = false;
+    const statusEl = document.getElementById('statusText');
+
+    const maxLen = Math.min(cfg.maxLenCap, cfg.maxLen + Math.floor((stage - 1) / 2));
+    answer = generatePathToLastRow(cfg.gridSize, cfg.minLen, maxLen);
+    cfg.timeLimit = cfg.timePerCell ? answer.length * cfg.timePerCell + cfg.timeBonus : null;
+    buildEmptyGrid(cfg.gridSize);
+
+    statusEl.textContent = 'Hãy ghi nhớ đường đi...';
+    statusEl.className = 'active';
+
+    clearTimeout(gameTimer);
+    clearTimeout(pathAnimTimer);
+    animatePathReveal(answer, currentMoveSpeed, () => {
+        inputEnabled = true;
+        statusEl.textContent = 'Vẽ lại đúng đường đi!';
+        statusEl.className = 'active';
+        startAnswerTimer();
+    });
 }

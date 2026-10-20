@@ -25,9 +25,9 @@ const NUMBER_CONFIG = {
     hard: { gridSize: 4, startCount: 6, observeTime: 2200, timeLimit: 12000 },
 };
 const PATH_CONFIG = {
-    easy: { gridSize: 5, moveSpeed: 600, timeLimit: null },
-    medium: { gridSize: 6, moveSpeed: 450, timeLimit: null },
-    hard: { gridSize: 7, moveSpeed: 300, timeLimit: 12000 },
+    easy: { gridSize: 4, moveSpeed: 600, speedStep: 40, minSpeed: 300, minLen: 5, maxLen: 7, maxLenCap: 9, timePerCell: null, timeBonus: 0 },
+    medium: { gridSize: 5, moveSpeed: 480, speedStep: 35, minSpeed: 250, minLen: 7, maxLen: 10, maxLenCap: 13, timePerCell: null, timeBonus: 0 },
+    hard: { gridSize: 6, moveSpeed: 380, speedStep: 30, minSpeed: 200, minLen: 8, maxLen: 12, maxLenCap: 16, timePerCell: 1200, timeBonus: 3000 },
 };
 const MAZE_CONFIG = {
     easy: { gridSize: 7, observeTime: 120000 },
@@ -214,7 +214,9 @@ function onStageCleared() {
         if (stage % 2 === 1) cellCount++;
         gameTimer = setTimeout(playSequenceStage, 1200);
     } else if (chosenMode === 'path') {
-        currentMoveSpeed = Math.max(180, currentMoveSpeed - 25);
+        if (stage % 2 === 1) {
+            currentMoveSpeed = Math.max(cfg.minSpeed, currentMoveSpeed - cfg.speedStep);
+        }
         gameTimer = setTimeout(playPathStage, 1200);
     } else {
         gameTimer = setTimeout(playMazeStage, 1200);
