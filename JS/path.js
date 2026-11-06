@@ -63,7 +63,7 @@ function animatePathReveal(path, stepDuration, onDone) {
             const cell = grid.children[path[i]];
             cell.classList.add('path-lit');
             if (i === 0) cell.textContent = 'S';
-            else if (i === path.length - 1) cell.textContent = 'K';
+            else if (i === path.length - 1) cell.textContent = 'E';
             i++;
             pathAnimTimer = setTimeout(step, stepDuration);
         }

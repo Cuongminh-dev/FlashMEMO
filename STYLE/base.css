@@ -1,4 +1,5 @@
 :root {
+    color-scheme: dark;
     --bg: #12141C;
     --card-bg: #1B1E29;
     --card-bg-hover: #232635;
@@ -9,6 +10,20 @@
     --text-main: #EDEAE3;
     --text-muted: #8C90A3;
     --border: #2A2D3A;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #E9F1EE;
+    --card-bg: #F8FBFA;
+    --card-bg-hover: #DCEAE5;
+    --accent-amber: #C27F1E;
+    --accent-teal: #1F8579;
+    --accent-violet: #6F62C9;
+    --accent-red: #C4452F;
+    --text-main: #25332F;
+    --text-muted: #56685F;
+    --border: #C6D7D0;
 }
 
 * {
@@ -69,4 +84,16 @@ body {
     80% {
         transform: translateX(4px);
     }
+}
+
+[data-theme="light"] .diff-pill.selected,
+[data-theme="light"] .start-btn.ready,
+[data-theme="light"] #nameModalSave,
+[data-theme="light"] #comboDisplay,
+[data-theme="light"] #editNameBtn:hover {
+    color: #1F2A27;
+}
+
+[data-theme="light"] .go-btn.primary {
+    color: #FFFFFF;
 }

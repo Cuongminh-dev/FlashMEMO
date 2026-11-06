@@ -19,6 +19,19 @@ function saveNameFromModal() {
 document.getElementById('nameModalInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') saveNameFromModal();
 });
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('themeToggle').textContent = theme === 'light' ? '🌙' : '☀️';
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+}
+
+applyTheme(localStorage.getItem('theme') || 'dark');
 const NUMBER_CONFIG = {
     easy: { gridSize: 3, startCount: 3, observeTime: 4500, timeLimit: null },
     medium: { gridSize: 4, startCount: 5, observeTime: 3500, timeLimit: null },
@@ -30,10 +43,10 @@ const PATH_CONFIG = {
     hard: { gridSize: 6, moveSpeed: 380, speedStep: 30, minSpeed: 200, minLen: 8, maxLen: 12, maxLenCap: 16, timePerCell: 1200, timeBonus: 3000 },
 };
 const MAZE_CONFIG = {
-    easy: { gridSize: 7, observeTime: 120000 },
-    medium: { gridSize: 9, observeTime: 60000 },
-    hard: { gridSize: 11, observeTime: 30000 },
-}
+    easy: { gridSize: 7, observeTime: 120000, minRatio: 0.5, maxRatio: 0.7 },
+    medium: { gridSize: 9, observeTime: 60000, minRatio: 0.6, maxRatio: 0.8 },
+    hard: { gridSize: 11, observeTime: 30000, minRatio: 0.8, maxRatio: 1.0 },
+};
 const CONFIG_MAP = {
     numbers: NUMBER_CONFIG,
     path: PATH_CONFIG,

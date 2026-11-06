@@ -12,7 +12,7 @@
 
 .tagline {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 1.15 rem;
     text-align: center;
     margin-bottom: 36px;
     max-width: 420px;
@@ -21,14 +21,14 @@
 
 .screen {
     width: 100%;
-    max-width: 440px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     gap: 14px;
 }
 
 .section-label {
-    font-size: 0.85rem;
+    font-size: 1.15rem;
     color: var(--text-muted);
     margin: 8px 0 -2px;
 }
@@ -55,8 +55,8 @@
 }
 
 .mode-icon {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
     flex-shrink: 0;
     border-radius: 10px;
     display: flex;
@@ -66,21 +66,21 @@
 }
 
 .mode-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .mode-info h3 {
     font-family: 'Fraunces', serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-bottom: 2px;
 }
 
 .mode-info p {
-    font-size: 0.78rem;
+    font-size: 0.92rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 .difficulty-row {
@@ -98,9 +98,9 @@
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 12px 6px;
+    padding: 14px 6px;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 1.0rem;
     font-weight: 600;
     color: var(--text-muted);
     cursor: pointer;
@@ -121,7 +121,7 @@
     background: var(--text-muted);
     color: var(--bg);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: not-allowed;
     transition: background 0.2s ease, opacity 0.2s ease;
     opacity: 0.5;
