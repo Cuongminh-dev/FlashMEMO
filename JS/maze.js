@@ -45,20 +45,6 @@ function generatePerfectMaze(size) {
 
     return walls;
 }
-// function printMaze(walls) {
-//     const size = walls.length;
-//     let text = '+' + '---+'.repeat(size) + '\n';
-//     for (let r = 0; r < size; r++) {
-//         let line = '|';
-//         let bottom = '+';
-//         for (let c = 0; c < size; c++) {
-//             line += '   ' + (walls[r][c].right ? '|' : ' ');
-//             bottom += (walls[r][c].bottom ? '---' : '   ') + '+';
-//         }
-//         text += line + '\n' + bottom + '\n';
-//     }
-//     console.log(text);
-// }
 function bfsFarthest(walls, startR, startC) {
     const size = walls.length;
     const dist = Array.from({ length: size }, () => Array(size).fill(-1));
@@ -206,9 +192,134 @@ function renderCountdown(ms) {
     document.getElementById('timerDisplay').textContent =
         m > 0 ? m + ':' + String(s).padStart(2, '0') : s + 's';
 }
+let mazeSteps = 0;
 
+const MAZE_MOVES = {
+    up: { wall: 'top', dr: -1, dc: 0 },
+    down: { wall: 'bottom', dr: 1, dc: 0 },
+    left: { wall: 'left', dr: 0, dc: -1 },
+    right: { wall: 'right', dr: 0, dc: 1 },
+};
+
+function moveMaze(dir, fromRepeat = false) {
+    if (!mazeInputEnabled) return;
+    const move = MAZE_MOVES[dir];
+    if (!move) return;
+
+    if (mazeWalls[mazeRow][mazeCol][move.wall]) {
+        if (!fromRepeat) hitMazeWall();
+        return;
+    }
+
+    mazeRow += move.dr;
+    mazeCol += move.dc;
+    positionToken();
+    updateFog();
+
+    if (mazeRow === mazeEndRow && mazeCol === mazeEndCol) {
+        mazeInputEnabled = false;
+        clearFog();
+        score += mazeSteps;
+        updateScoreDisplay();
+        onStageCleared();
+    }
+}
+
+function hitMazeWall() {
+    const statusEl = document.getElementById('statusText');
+
+    if (mazeGraceHits > 0) {
+        mazeGraceHits--;
+        statusEl.textContent = 'Đâm tường! (miễn phạt, còn ' + mazeGraceHits + ' lần)';
+        statusEl.className = 'error';
+        return;
+    }
+
+    loseLife();
+    if (lives <= 0) {
+        clearFog();
+        return;
+    }
+    statusEl.textContent = 'Đâm tường! Hãy thử hướng khác.';
+    statusEl.className = 'error';
+}
+const MAZE_INVERT = { up: 'down', down: 'up', left: 'right', right: 'left' };
+const MAZE_DOUBLE_WINDOW = 200;
+const mazeDouble = { pendingDir: null, heldDir: null, timer: null };
+let mazeVariant = 'normal';
+let mazeGraceHits = 0;
+const MAZE_VARIANTS = {
+    normal: {
+        label: '',
+        transform: (dir) => dir,
+    },
+    inverted: {
+        label: 'ĐẢO PHÍM',
+        graceHits: 2,
+        transform: (dir) => MAZE_INVERT[dir],
+    },
+    double: {
+        label: 'NHẤN ĐÚP',
+        transform: (dir, fromRepeat) => {
+            const d = mazeDouble;
+            if (fromRepeat) return dir === d.heldDir ? dir : null;
+            d.heldDir = dir;
+            if (d.pendingDir === dir) {
+                clearTimeout(d.timer);
+                d.pendingDir = null;
+                setMazeTokenArmed(false);
+                return dir;
+            }
+            d.pendingDir = dir;
+            setMazeTokenArmed(true);
+            clearTimeout(d.timer);
+            d.timer = setTimeout(() => {
+                d.pendingDir = null;
+                setMazeTokenArmed(false);
+            }, MAZE_DOUBLE_WINDOW);
+            return null;
+        },
+    }
+};
+function pickMazeVariant() {
+    if (stage % 2 === 1) return 'normal';
+    const pool = Object.keys(MAZE_VARIANTS).filter(key => key !== 'normal');
+    if (pool.length === 0) return 'normal';
+    return pool[Math.floor(Math.random() * pool.length)];
+}
+function handleMazeInput(dir, fromRepeat = false) {
+    if (!mazeInputEnabled) return;
+    const variant = MAZE_VARIANTS[mazeVariant];
+    const finalDir = variant.transform(dir, fromRepeat);
+    if (finalDir) moveMaze(finalDir, fromRepeat);
+}
+function setMazeTokenArmed(on) {
+    const token = document.getElementById('mazeToken');
+    if (token) token.classList.toggle('armed', on);
+}
+function resetMazeDouble() {
+    clearTimeout(mazeDouble.timer);
+    mazeDouble.pendingDir = null;
+    mazeDouble.heldDir = null;
+    setMazeTokenArmed(false);
+}
+document.addEventListener('keydown', (e) => {
+    if (chosenMode !== 'maze' || !mazeInputEnabled) return;
+    const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+    if (keys[e.key]) {
+        e.preventDefault();
+        handleMazeInput(keys[e.key], e.repeat);
+    }
+});
 function playMazeStage() {
     updateHeader();
+    mazeVariant = pickMazeVariant();
+    mazeGraceHits = MAZE_VARIANTS[mazeVariant].graceHits || 0;
+    resetMazeDouble();
+    const variantLabel = MAZE_VARIANTS[mazeVariant].label;
+    if (variantLabel) {
+        document.getElementById('stageDisplay').textContent += ' · ' + variantLabel;
+    }
     mazeInputEnabled = false;
     mazeSize = cfg.gridSize;
     mazeWalls = generatePerfectMaze(mazeSize);
@@ -247,55 +358,3 @@ function playMazeStage() {
         document.getElementById('dirHint').classList.remove('hidden');
     }, cfg.observeTime);
 }
-let mazeSteps = 0;
-
-const MAZE_MOVES = {
-    up: { wall: 'top', dr: -1, dc: 0 },
-    down: { wall: 'bottom', dr: 1, dc: 0 },
-    left: { wall: 'left', dr: 0, dc: -1 },
-    right: { wall: 'right', dr: 0, dc: 1 },
-};
-
-function moveMaze(dir, fromRepeat = false) {
-    if (!mazeInputEnabled) return;
-    const move = MAZE_MOVES[dir];
-    if (!move) return;
-
-    if (mazeWalls[mazeRow][mazeCol][move.wall]) {
-        if (!fromRepeat) hitMazeWall();
-        return;
-    }
-
-    mazeRow += move.dr;
-    mazeCol += move.dc;
-    positionToken();
-    updateFog();
-
-    if (mazeRow === mazeEndRow && mazeCol === mazeEndCol) {
-        mazeInputEnabled = false;
-        clearFog();
-        score += mazeSteps;
-        updateScoreDisplay();
-        onStageCleared();
-    }
-}
-
-function hitMazeWall() {
-    loseLife();
-    if (lives <= 0) {
-        clearFog();
-        return;
-    }
-    const statusEl = document.getElementById('statusText');
-    statusEl.textContent = 'Đâm tường! Hãy thử hướng khác.';
-    statusEl.className = 'error';
-}
-
-document.addEventListener('keydown', (e) => {
-    if (chosenMode !== 'maze' || !mazeInputEnabled) return;
-    const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
-    if (keys[e.key]) {
-        e.preventDefault();
-        moveMaze(keys[e.key], e.repeat);
-    }
-});

@@ -28,7 +28,13 @@
     background: var(--accent-violet);
     box-shadow: 0 0 10px 4px color-mix(in srgb, var(--accent-violet) 70%, transparent);
     transform: translate(-50%, -50%);
-    transition: left 0.15s ease, top 0.15s ease;
+    transition: left 0.15s ease, top 0.15s ease, transform 0.1s ease;
+}
+
+#mazeToken.armed {
+    transform: translate(-50%, -50%) scale(1.6);
+    background: var(--accent-amber);
+    box-shadow: 0 0 14px 6px color-mix(in srgb, var(--accent-amber) 80%, transparent);
 }
 
 #dirPad {

@@ -43,9 +43,9 @@ const PATH_CONFIG = {
     hard: { gridSize: 6, moveSpeed: 380, speedStep: 30, minSpeed: 200, minLen: 8, maxLen: 12, maxLenCap: 16, timePerCell: 1200, timeBonus: 3000 },
 };
 const MAZE_CONFIG = {
-    easy: { gridSize: 10, observeTime: 40000, minRatio: 0.5, maxRatio: 0.7 },
-    medium: { gridSize: 13, observeTime: 30000, minRatio: 0.6, maxRatio: 0.8 },
-    hard: { gridSize: 15, observeTime: 15000, minRatio: 0.8, maxRatio: 1.0 },
+    easy: { gridSize: 10, observeTime: 10000, minRatio: 0.5, maxRatio: 0.7 },
+    medium: { gridSize: 13, observeTime: 10000, minRatio: 0.6, maxRatio: 0.8 },
+    hard: { gridSize: 15, observeTime: 10000, minRatio: 0.8, maxRatio: 1.0 },
 };
 const CONFIG_MAP = {
     numbers: NUMBER_CONFIG,
