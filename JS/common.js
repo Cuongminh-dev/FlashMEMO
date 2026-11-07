@@ -35,7 +35,7 @@ applyTheme(localStorage.getItem('theme') || 'dark');
 const NUMBER_CONFIG = {
     easy: { gridSize: 3, startCount: 3, observeTime: 4500, timeLimit: null },
     medium: { gridSize: 4, startCount: 5, observeTime: 3500, timeLimit: null },
-    hard: { gridSize: 4, startCount: 6, observeTime: 2200, timeLimit: 12000 },
+    hard: { gridSize: 5, startCount: 6, observeTime: 2200, timeLimit: 12000 },
 };
 const PATH_CONFIG = {
     easy: { gridSize: 4, moveSpeed: 600, speedStep: 40, minSpeed: 300, minLen: 5, maxLen: 7, maxLenCap: 9, timePerCell: null, timeBonus: 0 },
@@ -43,9 +43,9 @@ const PATH_CONFIG = {
     hard: { gridSize: 6, moveSpeed: 380, speedStep: 30, minSpeed: 200, minLen: 8, maxLen: 12, maxLenCap: 16, timePerCell: 1200, timeBonus: 3000 },
 };
 const MAZE_CONFIG = {
-    easy: { gridSize: 7, observeTime: 120000, minRatio: 0.5, maxRatio: 0.7 },
-    medium: { gridSize: 9, observeTime: 60000, minRatio: 0.6, maxRatio: 0.8 },
-    hard: { gridSize: 11, observeTime: 30000, minRatio: 0.8, maxRatio: 1.0 },
+    easy: { gridSize: 10, observeTime: 40000, minRatio: 0.5, maxRatio: 0.7 },
+    medium: { gridSize: 13, observeTime: 30000, minRatio: 0.6, maxRatio: 0.8 },
+    hard: { gridSize: 15, observeTime: 15000, minRatio: 0.8, maxRatio: 1.0 },
 };
 const CONFIG_MAP = {
     numbers: NUMBER_CONFIG,

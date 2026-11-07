@@ -54,3 +54,23 @@
 .dir-btn:active {
     transform: scale(0.95);
 }
+
+#mazeSvg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.maze-walls {
+    stroke: var(--accent-violet);
+    stroke-width: 0.8;
+    stroke-linecap: round;
+}
+
+.maze-start {
+    fill: var(--accent-amber);
+}
+
+.maze-end {
+    fill: var(--accent-teal);
+}
